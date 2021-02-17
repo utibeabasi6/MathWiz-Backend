@@ -1,1 +1,1 @@
-"web: ./bin/MathWiz-Backend"
+"web: ./server.exe"
