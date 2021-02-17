@@ -2,10 +2,10 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+	"os"
 	)
 
 type Person struct {
@@ -24,8 +24,13 @@ func helloHandler (w http.ResponseWriter, _ *http.Request){
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/api/", helloHandler)
-	port := "8000"
-	fmt.Printf("Starting server on port %v\n", port)
+	port := os.Getenv("PORT")
+	if port == ""{
+		log.Println("Port variable not set")
+		log.Println("Defaulting to default port")
+		port = "8080"
+	}
+	log.Printf("Listening on port %v\n:", port)
 	log.Fatal(http.ListenAndServe(":" + port, r))
 
 }
