@@ -13,7 +13,7 @@ type Person struct {
 	Age int `json: age`
 }
 
-func helloHandler (w http.ResponseWriter, _ *http.Request){
+func helloHandler (w http.ResponseWriter, r *http.Request){
 	person := Person{Name: "Utibeabasi", Age: 17}
 	err := json.NewEncoder(w).Encode(person)
 	if err != nil{
@@ -30,7 +30,7 @@ func main() {
 		log.Println("Defaulting to default port")
 		port = "8080"
 	}
-	log.Printf("Listening on port %v\n:", port)
+	log.Printf("Listening on port %v:\n", port)
 	log.Fatal(http.ListenAndServe(":" + port, r))
 
 }
